@@ -1,146 +1,299 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Heavy Metal Tech — Manutenção, consultoria e suporte remoto para PCs. Performance gamer, upgrades e otimização com atendimento ágil." />
+  <meta name="theme-color" content="#121212" />
   <title>Heavy Metal Tech</title>
+
+  <!-- Open Graph / Social -->
+  <meta property="og:title" content="Heavy Metal Tech" />
+  <meta property="og:description" content="Manutenção, consultoria e suporte remoto para PCs. Especialista em performance gamer." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url\" content=\"https://heavy-metal-tech.github.io\" />
+  <meta property="og:image" content="/og-image.png" />
+
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background: #121212;
-      color: #f0f0f0;
+    /* ===== Reset + Base ===== */
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Arial, "Apple Color Emoji", "Segoe UI Emoji"; background:#0f0f10; color:#f2f2f3; line-height: 1.55; }
+    img { max-width: 100%; display: block; height: auto; }
+    a { color: inherit; text-decoration: none; }
+    :root {
+      --bg:#0f0f10;            /* background page */
+      --surface:#161617;       /* cards / header */
+      --surface-2:#1d1d1f;
+      --text:#f2f2f3;
+      --muted:#b9bcc3;
+      --brand:#27ae60;         /* primary */
+      --brand-2:#2ecc71;       /* hover */
+      --border:#26262a;
+      --shadow: 0 8px 24px rgba(0,0,0,.35);
+      --radius: 12px;
+      --container: 1100px;
     }
-    header {
-      background: #1c1c1c;
-      color: #f0f0f0;
-      padding: 25px;
-      text-align: center;
-      border-bottom: 3px solid #27ae60;
+
+    /* ===== Utilities ===== */
+    .container { width: 100%; max-width: var(--container); margin-inline: auto; padding-inline: 20px; }
+    .btn { display:inline-flex; align-items:center; gap:.5rem; padding:.8rem 1.1rem; border-radius:10px; background:var(--brand); color:#fff; font-weight:600; border:1px solid transparent; transition:.25s ease; }
+    .btn:hover { background:var(--brand-2); transform: translateY(-1px); }
+    .btn.outline { background:transparent; border-color:var(--brand); color:var(--brand); }
+    .btn.outline:hover { background:rgba(39,174,96,.08); }
+    .card { background: linear-gradient(180deg, var(--surface), var(--surface-2)); border:1px solid var(--border); border-radius: var(--radius); padding: 16px; box-shadow: var(--shadow); transition: transform .2s ease; }
+    .card:hover { transform: translateY(-2px); }
+    .kicker { color: var(--brand-2); letter-spacing:.08em; font-size:.78rem; text-transform:uppercase; }
+
+    /* ===== Header (Sticky) ===== */
+    header { position: sticky; top: 0; z-index: 50; backdrop-filter: saturate(140%) blur(6px); background: rgba(22,22,23,.8); border-bottom:1px solid var(--border); }
+    .topbar { display:flex; align-items:center; justify-content:space-between; padding:14px 20px; }
+    .brand { display:flex; align-items:center; gap:.6rem; font-weight:800; }
+    .brand .logo { width:28px; height:28px; border-radius:50%; background: conic-gradient(from 180deg at 50% 50%, #27ae60, #2ecc71, #27ae60); box-shadow: 0 0 0 2px #0f0f10 inset; }
+    .brand span { font-size:1.05rem; letter-spacing:.4px; }
+
+    /* ===== Nav ===== */
+    nav { display:flex; align-items:center; gap: 18px; }
+    nav a { color: var(--muted); font-weight:600; padding:8px 10px; border-radius:8px; transition:.2s ease; }
+    nav a:hover, nav a:focus { color: var(--text); background: rgba(255,255,255,.04); outline: none; }
+
+    /* Mobile menu */
+    .menu-toggle { display:none; border:1px solid var(--border); background:var(--surface); border-radius:10px; padding:.5rem .7rem; }
+    .menu-toggle svg { display:block; }
+    @media (max-width: 860px) {
+      nav { display:none; position: absolute; inset: calc(100% + 1px) 0 auto 0; background: var(--surface); border-bottom:1px solid var(--border); padding: 10px 20px 20px; }
+      nav.open { display:block; }
+      nav a { display:block; }
+      .menu-toggle { display:inline-flex; align-items:center; gap:.5rem; color:var(--muted); }
     }
-    nav {
-      margin: 15px 0;
-    }
-    nav a {
-      margin: 0 12px;
-      text-decoration: none;
-      color: #27ae60;
-      font-weight: bold;
-      transition: color 0.3s;
-    }
-    nav a:hover {
-      color: #2ecc71;
-    }
-    section {
-      padding: 20px;
-      max-width: 900px;
-      margin: auto;
-    }
-    h2 {
-      color: #27ae60;
-      border-bottom: 2px solid #27ae60;
-      padding-bottom: 5px;
-    }
-    .card {
-      background: #1e1e1e;
-      padding: 15px;
-      margin: 15px 0;
-      border-radius: 8px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.6);
-    }
-    .button {
-      display: inline-block;
-      padding: 10px 15px;
-      background: #27ae60;
-      color: white;
-      text-decoration: none;
-      border-radius: 5px;
-      margin-top: 10px;
-      transition: background 0.3s;
-    }
-    .button:hover {
-      background: #2ecc71;
-    }
-    footer {
-      text-align: center;
-      background: #1c1c1c;
-      color: #aaa;
-      padding: 15px;
-      margin-top: 20px;
-      border-top: 3px solid #27ae60;
-    }
+
+    /* ===== Hero ===== */
+    .hero { padding: 42px 0 24px; text-align:center; }
+    .hero h1 { font-size: clamp(1.6rem, 2.5vw + 1rem, 2.4rem); margin: 6px 0; }
+    .hero p { color: var(--muted); margin: 0; }
+    .hero-cta { margin-top: 14px; display:flex; gap:10px; justify-content:center; flex-wrap: wrap; }
+
+    /* ===== Sections ===== */
+    section { padding: 40px 0; scroll-margin-top: 90px; }
+    h2.section-title { font-size: clamp(1.2rem, 2vw + .6rem, 1.6rem); margin: 0 0 16px; color: var(--brand-2); border-bottom:2px solid var(--brand); padding-bottom: 8px; }
+
+    /* Serviços grid */
+    .grid { display:grid; grid-template-columns: repeat(12, 1fr); gap: 16px; }
+    .col-4 { grid-column: span 4; }
+    .col-6 { grid-column: span 6; }
+    .col-12 { grid-column: span 12; }
+    @media (max-width: 860px){ .col-4, .col-6 { grid-column: span 12; } }
+
+    .service h3 { margin: 8px 0 8px; font-size: 1.05rem; }
+    .service p { margin: 0 0 8px; color: var(--muted); }
+
+    /* Preços */
+    .prices ul { margin: 0; padding-left: 1.1rem; }
+    .prices li { margin: .4rem 0; }
+    .prices small { color: var(--muted); }
+
+    /* Sobre */
+    .about p { margin: 0; color: var(--muted); }
+
+    /* Contato */
+    .contact .stack { display:grid; gap: 12px; }
+    .contact label { font-size:.92rem; color:#e6e6e7; }
+    .contact input, .contact textarea { width:100%; padding:.9rem 1rem; border-radius:10px; border:1px solid var(--border); background:#121214; color:var(--text); }
+    .contact textarea { min-height: 120px; resize: vertical; }
+
+    /* Footer */
+    footer { border-top:1px solid var(--border); color:var(--muted); background: var(--surface); }
+    .footer-inner { padding: 22px 20px; text-align:center; }
+
+    /* Floating WhatsApp */
+    .float-wa { position: fixed; right: 16px; bottom: 16px; z-index: 40; }
+    .float-wa .btn { box-shadow: var(--shadow); }
+
+    /* Motion preference */
+    @media (prefers-reduced-motion: reduce) { * { transition: none !important; scroll-behavior: auto; } }
   </style>
-  <link rel="icon" type="image/svg+xml" href="favicon.svg">
 </head>
 <body>
-  <header>
-    <h1>⚡ Heavy Metal Tech ⚡</h1>
-    <p>Manutenção, consultoria e suporte remoto para PCs</p>
-    <nav>
-      <a href="#servicos">Serviços</a>
-      <a href="#precos">Preços</a>
-      <a href="#sobre">Sobre</a>
-      <a href="#contato">Contato</a>
-    </nav>
+  <!-- Header / Nav -->
+  <header aria-label="Cabeçalho e navegação">
+    <div class="topbar container">
+      <a class="brand" href="#top" aria-label="Ir para o topo">
+        <span class="logo" aria-hidden="true"></span>
+        <span>⚡ Heavy Metal Tech</span>
+      </a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="siteNav">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18" stroke="#b9bcc3" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
+      <nav id="siteNav" aria-label="Navegação principal">
+        <a href="#servicos">Serviços</a>
+        <a href="#precos">Preços</a>
+        <a href="#sobre">Sobre</a>
+        <a href="#contato">Contato</a>
+      </nav>
+    </div>
   </header>
 
-  <section id="servicos">
-    <h2>Serviços</h2>
-   <div class="card">
-      <h3>🛠️ Criação de alguns sites</h3>
-      <p>Preços variam de acordo com complexidade.</p>
-    </div>
-    <div class="card">
-      <h3>🛠️ Manutenção Remota</h3>
-      <p>Remoção de vírus, otimização do Windows, instalação de programas e drivers.</p>
-    </div>
-    <div class="card">
-      <h3>🖥️ Manutenção Presencial</h3>
-      <p>Limpeza interna, troca de pasta térmica, upgrades e montagem de PCs.</p>
-    </div>
-    <div class="card">
-      <h3>🎮 Consultoria Gamer</h3>
-      <p>Escolha de peças, upgrades e otimização para jogos.</p>
-    </div>
-    <div class="card">
-      <h3>📦 Pacote Mensal</h3>
-      <p>Suporte remoto até 3 vezes no mês, entre em contato para saber mais.</p>
+  <!-- Hero -->
+  <section class="hero" id="top">
+    <div class="container">
+      <p class="kicker">suporte & performance</p>
+      <h1>Manutenção, consultoria e suporte remoto para PCs</h1>
+      <p>Especialista em hardware e software — estabilidade, velocidade e <strong>performance gamer</strong> de verdade.</p>
+      <div class="hero-cta">
+        <a class="btn" href="https://wa.me/5511947250711" target="_blank" rel="noopener noreferrer" aria-label="Abrir conversa no WhatsApp">💬 Falar no WhatsApp</a>
+        <a class="btn outline" href="#precos">Ver preços</a>
+      </div>
     </div>
   </section>
 
-  <section id="precos">
-    <h2>Preços</h2>
-    <div class="card">
-      <ul>
-        <li>Diagnóstico remoto: R$100</li>
-        <li>Remoção de vírus / otimização: R$80 a R$100</li>
-        <li>Formatação completa: R$200</li>
-        <li>Consultoria de upgrade: R$100 a R$200</li>
-      </ul>
-      <p><em>Valores podem variar conforme a complexidade.</em></p>
+  <!-- Serviços -->
+  <section id="servicos" aria-labelledby="servicos-title">
+    <div class="container">
+      <h2 class="section-title" id="servicos-title">Serviços</h2>
+      <div class="grid">
+        <article class="card service col-6" aria-label="Criação de sites">
+          <h3>🛠️ Criação de Sites</h3>
+          <p>Sites rápidos e responsivos (landing pages e vitrines). SEO básico e integração com WhatsApp/Formulários.</p>
+          <a class="btn" href="#contato">Solicitar orçamento</a>
+        </article>
+        <article class="card service col-6" aria-label="Manutenção remota">
+          <h3>🛠️ Manutenção Remota</h3>
+          <p>Remoção de vírus, otimização do Windows, instalação de programas e drivers. Atendimento ágil.</p>
+          <a class="btn" href="#contato">Agendar atendimento</a>
+        </article>
+        <article class="card service col-6" aria-label="Manutenção presencial">
+          <h3>🖥️ Manutenção Presencial</h3>
+          <p>Limpeza interna, troca de pasta térmica, upgrades e montagem de PCs sob medida.</p>
+          <a class="btn" href="#contato">Pedir visita</a>
+        </article>
+        <article class="card service col-6" aria-label="Consultoria gamer">
+          <h3>🎮 Consultoria Gamer</h3>
+          <p>Escolha de peças, upgrades e otimizações finas para FPS e baixa latência.</p>
+          <a class="btn" href="#contato">Falar sobre setup</a>
+        </article>
+        <article class="card service col-12" aria-label="Pacote mensal">
+          <h3>📦 Pacote Mensal</h3>
+          <p>Suporte remoto até <strong>3 vezes por mês</strong>. Ideal para quem quer manutenção contínua e previsibilidade.</p>
+          <a class="btn" href="#contato">Quero saber mais</a>
+        </article>
+      </div>
     </div>
   </section>
 
-  <section id="sobre">
-    <h2>Sobre Mim</h2>
-    <div class="card">
-      <p>Sou William, técnico mecatrônico e fundador da Heavy Metal Tech 🤘.  
-         Especialista em hardware e software de PCs, ajudo clientes a manter seus computadores rápidos, estáveis e prontos para qualquer desafio, seja trabalho ou jogos pesados.</p>
+  <!-- Preços -->
+  <section id="precos" aria-labelledby="precos-title">
+    <div class="container">
+      <h2 class="section-title" id="precos-title">Preços</h2>
+      <div class="card prices">
+        <ul>
+          <li><strong>Diagnóstico remoto</strong>: R$ 100</li>
+          <li><strong>Remoção de vírus / otimização</strong>: R$ 80–100</li>
+          <li><strong>Formatação completa</strong>: R$ 200</li>
+          <li><strong>Consultoria de upgrade</strong>: R$ 100–200</li>
+        </ul>
+        <p><small>Valores podem variar conforme complexidade, peças e deslocamento.</small></p>
+      </div>
     </div>
   </section>
 
-  <section id="contato">
-    <h2>Contato</h2>
-    <div class="card">
-      <p>Entre em contato pelo WhatsApp ou e-mail:</p>
-      <a class="button" href="https://wa.me/5511947250711" target="_blank">💬 Falar no WhatsApp</a>
-      <p>Email: <strong>wmat.wm@gmail.com</strong></p>
+  <!-- Sobre -->
+  <section id="sobre" aria-labelledby="sobre-title">
+    <div class="container">
+      <h2 class="section-title" id="sobre-title">Sobre Mim</h2>
+      <article class="card about">
+        <p>Sou <strong>William</strong>, técnico mecatrônico e fundador da <strong>Heavy Metal Tech</strong> 🤘. Especialista em hardware e software de PCs, ajudo clientes a manter seus computadores rápidos, estáveis e prontos para qualquer desafio, seja trabalho ou jogos pesados.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- Contato -->
+  <section id="contato" aria-labelledby="contato-title">
+    <div class="container">
+      <h2 class="section-title" id="contato-title">Contato</h2>
+      <div class="grid">
+        <div class="card col-6">
+          <p>Entre em contato pelo WhatsApp ou e-mail:</p>
+          <p><a class="btn" href="https://wa.me/5511947250711" target="_blank" rel="noopener noreferrer">💬 Falar no WhatsApp</a></p>
+          <p>Email: <strong>wmat.wm@gmail.com</strong></p>
+        </div>
+        <div class="card col-6 contact" aria-label="Formulário de contato">
+          <form class="stack" action="https://formspree.io/f/SEU_ID" method="POST">
+            <label for="nome">Nome</label>
+            <input id="nome" name="nome" required />
+            <label for="email">Email</label>
+            <input id="email" type="email" name="email" required />
+            <label for="mensagem">Mensagem</label>
+            <textarea id="mensagem" name="mensagem" placeholder="Conte rapidamente o que você precisa"></textarea>
+            <button class="btn" type="submit">Enviar</button>
+          </form>
+        </div>
+      </div>
     </div>
   </section>
 
   <footer>
-    <p>© 2025 Heavy Metal Tech - Todos os direitos reservados</p>
+    <div class="container footer-inner">
+      <p>© 2025 Heavy Metal Tech — Todos os direitos reservados</p>
+      <p>
+        <a href="#servicos">Serviços</a> ·
+        <a href="#precos">Preços</a> ·
+        <a href="#sobre">Sobre</a> ·
+        <a href="#contato">Contato</a>
+      </p>
+    </div>
   </footer>
+
+  <!-- Botão flutuante do WhatsApp -->
+  <div class="float-wa">
+    <a class="btn" href="https://wa.me/5511947250711" target="_blank" rel="noopener noreferrer" aria-label="Abrir WhatsApp">
+      <span aria-hidden="true">💬</span> WhatsApp
+    </a>
+  </div>
+
+  <!-- A11y: fechar menu ao clicar em links e fora -->
+  <script>
+    const toggle = document.getElementById('menuToggle');
+    const nav = document.getElementById('siteNav');
+
+    function setOpen(open){
+      if(open){ nav.classList.add('open'); toggle.setAttribute('aria-expanded','true'); }
+      else { nav.classList.remove('open'); toggle.setAttribute('aria-expanded','false'); }
+    }
+
+    toggle?.addEventListener('click', () => {
+      setOpen(!nav.classList.contains('open'));
+    });
+
+    nav?.addEventListener('click', (e) => {
+      if(e.target.tagName === 'A') setOpen(false);
+    });
+
+    document.addEventListener('click', (e) => {
+      const clickInside = e.target.closest('#siteNav') || e.target.closest('#menuToggle');
+      if(!clickInside) setOpen(false);
+    });
+  </script>
+
+  <!-- Schema.org (ajuda SEO local) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ComputerRepairService",
+    "name": "Heavy Metal Tech",
+    \"url\": \"https://heavy-metal-tech.github.io\",
+    "areaServed": "Brasil",
+    "telephone": "+55 11 94725-0711",
+    "sameAs": [
+      "https://wa.me/5511947250711"
+    ],
+    "serviceOffer": [
+      {"@type":"Service","name":"Manutenção Remota"},
+      {"@type":"Service","name":"Manutenção Presencial"},
+      {"@type":"Service","name":"Consultoria Gamer"},
+      {"@type":"Service","name":"Formatação"}
+    ]
+  }
+  </script>
 </body>
 </html>
